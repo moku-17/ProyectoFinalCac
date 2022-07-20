@@ -9,6 +9,8 @@ $id_artista = $artista->get_id();
 $id_tipo = $artista->get_id_tipo();
 $categoria = $id_tipo;
 $id_obra=$_GET['id_obra'];
+
+echo $id_artista.' '.$id_obra;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -99,7 +101,7 @@ $id_obra=$_GET['id_obra'];
                                 <label for="fecha">Año de creación</label>
                                 <input type="number" class="form-control" name="fecha" id="fecha" maxlength="4" min="1900" max="2022" placeholder="Año de creación" value="<?php echo $obra->get_fecha(); ?>" required>
                             </div>
-                            <div class="text-center mt-3"><button type="submit">Modificar obra</button></div>
+                            <div class="text-center mt-3"><button type="submit">Modificar obra</button> <button type="button" class="btn" onclick="window.history.back();">Cancelar</button></div>
                         </form>
                     </div>
 

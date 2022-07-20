@@ -172,8 +172,9 @@ $id_tipo = $artista->get_id_tipo();
           require_once("../model/Artista.php");
           $artistaDAO = new ArtistaDAO();
           $artista = $artistaDAO->get_artista($id_artista); ?>
-          <form action="../controller/ArtistaUpdate.php" method="post" role="form" class="form" novalidate>
+          <form action="../controller/ArtistaUpdate.php" method="post" role="form" class="form was-validated" novalidate>
             <input type="hidden" name="id" value="<?php echo $id_artista; ?>">
+            <input type="hidden" name="user" value="<?php echo $artista->get_user(); ?>">
             <h5>Datos acerca de <?php echo $artista->get_nombre(); ?></h5>
             <p><small>Categoría artística:</small></p>
             <div class="form-check form-check-inline">
@@ -191,38 +192,39 @@ $id_tipo = $artista->get_id_tipo();
             <div class="form-group mt-3">
               <label for="nombre">Nombre del artista</label>
               <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre del artista" value="<?php echo $artista->get_nombre(); ?>" required>
-              <div class="messages"></div>
+              <div class="invalid-feedback">Debe ingresar el nombre del artista o grupo</div>
             </div>
             <div class="form-group mt-3">
               <label for="website">Link a más info (URL que empiece con http://)</label>
-              <input type="text" class="form-control" name="website" id="website" placeholder="Link a más info (URL que empiece con http://)" value="<?php echo $artista->get_website(); ?>" required>
-              <div class="messages"></div>
+              <input type="text" class="form-control" name="website" id="website" placeholder="Link a más info (URL completa)" value="<?php echo $artista->get_website(); ?>" required pattern="https?://.+" title="Incluir http://">
+              <div class="invalid-feedback">Debe incluir http:// o https://</div>
             </div>
             <div class="form-group mt-3">
               <label for="foto">Link a una foto (URL que empiece con http://)</label>
-              <input type="text" class="form-control" name="foto" id="foto" placeholder="Link a una foto (URL que empiece con http://)" value="<?php echo $artista->get_foto(); ?>" required>
-              <div class="messages"></div>
+              <input type="text" class="form-control" name="foto" id="foto" placeholder="Link a una foto (URL completa)" value="<?php echo $artista->get_foto(); ?>" required pattern="https?://.+" title="Incluir http://">
+              <div class="invalid-feedback">Debe incluir http:// o https://</div>
             </div>
             <div class="form-group mt-3">
               <label for="descripcion">Una breve descripción sobre sobre el artista (hasta 400 caracteres)</label>
               <textarea class="form-control" name="descripcion" id="descripcion" rows="5" maxlength="400" placeholder="Una breve descripción sobre sobre el artista (hasta 400 caracteres)" required><?php echo $artista->get_descripcion(); ?></textarea>
-              <div class="messages"></div>
+              <div class="invalid-feedback">Debe ingresar una breve descripción de hasta 400 caracteres</div>
             </div>
             <br>
             <h5>Datos para ingresar a tu cuenta</h5>
             <div class="form-group mt-3">
               <label for="user">Tu nombre de usuario (no se puede modificar)</label>
-              <input type="text" class="form-control" name="user" id="user" placeholder="Tu nombre de usuario (no se puede modificar)" value="<?php echo $artista->get_user(); ?>" disabled>
-              <div class="messages"></div>
+              <input type="text" class="form-control" name="" id="user" placeholder="Tu nombre de usuario (no se puede modificar)" value="<?php echo $artista->get_user(); ?>" disabled>
             </div>
             <div class="form-group mt-3">
               <label for="email">Tu email</label>
-              <input type="email" class="form-control" name="email" id="email" placeholder="Tu email" value="<?php echo $artista->get_email(); ?>" required>
+              <input type="email" class="form-control" name="email" id="email" placeholder="Tu email" value="<?php echo $artista->get_email(); ?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Ingresar un email válido">
+              <div class="invalid-feedback">Debe ingresar un email válido</div>
               <div class="messages"></div>
             </div>
             <div class="form-group mt-3">
               <label for="pass">Ingresá tu contraseña o una nueva contraseña</label>
-              <input type="password" class="form-control" name="pass" id="pass" placeholder="Ingresá tu contraseña o una nueva contraseña" value="<?php echo $artista->get_pass(); ?>" required>
+              <input type="password" class="form-control" name="pass" id="pass" placeholder="Ingresá tu contraseña o una nueva contraseña" value="<?php echo $artista->get_pass(); ?>" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos un número, una mayúscula y una minúscula, y al menos 8 caracteres">
+              <div class="invalid-feedback">Debe contener al menos un número, una mayúscula y una minúscula, y al menos 8 caracteres</div>
               <div class="messages"></div>
             </div>
             <br>
@@ -243,14 +245,15 @@ $id_tipo = $artista->get_id_tipo();
           </button>
         </div>
         <div class="modal-body">
-          <form action="../controller/ObraUpdate.php" method="post" role="form" class="form">
+          <form action="../controller/ObraUpload.php" method="post" role="form" class="form">
             <h5>Datos sobre la obra</h5>
             <input type="hidden" name="id_artista" value="<?php echo $id_artista; ?>">
             <div class="form-group mt-3">
               <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Título de la obra" required>
             </div>
             <div class="form-group mt-3">
-              <input type="text" class="form-control" name="link" id="link" placeholder="<?php if ($id_tipo == 1) echo 'ID de video de YouTube (después de https://www.youtube.com/watch?v=)'; elseif ($id_tipo == 2) echo 'URL de una imagen (completa, que empiece con https://)'; ?>" required>
+              <input type="text" class="form-control" name="link" id="link" placeholder="<?php if ($id_tipo == 1) echo 'ID de video de YouTube (después de https://www.youtube.com/watch?v=)';
+                                                                                          elseif ($id_tipo == 2) echo 'URL de una imagen (completa, que empiece con https://)'; ?>" required>
             </div>
             <div class="form-group mt-3">
               <input type="number" class="form-control" name="fecha" id="fecha" maxlength="4" min="1900" max="2022" placeholder="Año de creación" required>

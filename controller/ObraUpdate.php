@@ -10,7 +10,7 @@ require_once("../dao/ObraDAO.php");
 $obraDAO = new ObraDAO();
 $guardado = $obraDAO->actualizar_obra($id_obra, $nombre, $link, $fecha, $id_artista);
 
-if ($guardado) {
+if ($guardado!=0) {
     ?>
     <script>
             alert("¡Actualización exitosa!");
@@ -21,7 +21,7 @@ if ($guardado) {
 } else {
     ?>
     <script>
-            alert("No fue posible actualizar los datos.");
+            alert("No actualizamos los datos de tu obra.");
             window.history.back();
     </script>
     <?php

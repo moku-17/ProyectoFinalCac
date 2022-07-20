@@ -83,9 +83,9 @@ header('Content-Type: text/html; charset=utf-8');
     <section id="about" class="about">
       <div class="container">
 
-        <div class="row no-gutters">
+        <div class="row">
           <div class="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-lg-start"></div>
-          <div class="col-xl-7 ps-0 ps-lg-5 pe-lg-1 d-flex align-items-stretch">
+          <div class="col-xl-7 ps-lg-5 pe-lg-1 d-flex align-items-stretch">
             <div class="content d-flex flex-column justify-content-center">
               <h3>Acerca del proyecto Indies Showcase</h3>
               <p>
@@ -174,7 +174,7 @@ header('Content-Type: text/html; charset=utf-8');
         <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-3">
           <div class="icon-box">
             <div class="card-artista" style="background-image: url(' . $artista->get_foto() . ');"></div>
-            <h3 class="title"><a href="' . $artista->get_website() . '">' . $artista->get_nombre() . '</a></h3>
+            <h3 class="title"><a href="' . $artista->get_website() . '" target="_blank">' . $artista->get_nombre() . '</a></h3>
             <div class="icon">';
             if ($categoria == 1) echo '<i class="fa-solid fa-music"></i>';
             if ($categoria == 2) echo '<i class="fa-solid fa-image"></i>';

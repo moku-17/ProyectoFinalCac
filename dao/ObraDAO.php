@@ -28,10 +28,10 @@ class ObraDAO {
         return $conexionDB->contar_filas() > 0;
     }
 
-    public function actualizar_obra($id, $nombre, $link, $fecha, $id_artista) {
+    public function actualizar_obra($id_obra, $nombre, $link, $fecha, $id_artista) {
         require("../database/ConnDB.php");
 
-        $sql = "UPDATE obras SET nombre = '$nombre', link = '$link', fecha = '$fecha', id_artista = '$id_artista' WHERE id ='$id'";
+        $sql = "UPDATE obras SET nombre = '$nombre', link = '$link', fecha = '$fecha', id_artista = '$id_artista' WHERE id ='$id_obra'";
         $conexionDB->ejecutar($sql);
 
         return $conexionDB->contar_filas() > 0;

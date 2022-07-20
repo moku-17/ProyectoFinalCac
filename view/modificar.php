@@ -9,8 +9,6 @@ $id_artista = $artista->get_id();
 $id_tipo = $artista->get_id_tipo();
 $categoria = $id_tipo;
 $id_obra=$_GET['id_obra'];
-
-echo $id_artista.' '.$id_obra;
 ?>
 <!DOCTYPE html>
 <html lang="es">

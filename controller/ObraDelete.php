@@ -1,7 +1,7 @@
 <?php 
 $id=$_GET["id"];
 
-require_once("../dao/obraDAO.php");
+require_once("../dao/ObraDAO.php");
 
 $obraDAO = new ObraDAO();
 $eliminado = $obraDAO->eliminar_obra($id);

@@ -14,7 +14,7 @@ require_once("../dao/ArtistaDAO.php");
 $artistaDAO = new ArtistaDAO();
 $guardado = $artistaDAO->actualizar_artista($id, $user, $pass, $nombre, $email, $website, $foto, $id_tipo, $descripcion);
 
-if ($guardado!=0) {
+if ($guardado) {
     session_start();
     $_SESSION['artista'] = $guardado;
     ?>
